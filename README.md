@@ -7,7 +7,6 @@ Corresponde al nombre de la secuencia sobre la que se anotan las característica
 **Ejemplo:**
 ctg123
 
-
 ### Campo 2: Fuente de la anotación (source)
 
 Describe el algoritmo, software o base de datos que generó la anotación.
@@ -20,15 +19,11 @@ Define el tipo de elemento biológico anotado, como gen, ARN mensajero, entre ot
 **Ejemplo:**
 gene, mRNA, CDS, TF_binding_site
 
----
-
 ### Campo 4 y 5. Coordenadas (4:start y 5:end)
 
 Indican la posición inicial y final del elemento sobre la secuencia. Son números **enteros positivos**, indexados desde 1 (no desde 0 como en otros formatos).
 **Ejemplo:**
-1000	9000 (la secuencia se ubica desde la posición 1000 a 9000)
-
----
+1200	8700 (la secuencia se ubica desde la posición 1200 a 8700)
 
 ### Campo 6. Puntaje (score)
 
@@ -36,9 +31,7 @@ Valor numérico (p. ej., e-value o p-value) asociado a la anotación. Si no apli
 **Ejemplo:**
 6.2e-45 
 
----
-
-### 7. Dirección de la hebra (strand)
+### Campo 7. Dirección de la hebra (strand)
 
 Indica en qué hebra se encuentra la anotación.
 
@@ -47,8 +40,6 @@ Indica en qué hebra se encuentra la anotación.
 * `.` si no aplica
   **Ejemplo:**
 +
-
----
 
 ### 8. Fase de lectura (phase: solo para CDS)
 
@@ -59,9 +50,8 @@ Especifica cómo deben agruparse los nucleótidos en codones. Solo es válida pa
 * `2`: codón inicia en el tercero nucleótido
 
 **Ejemplo:**
-0
+1
 
----
 
 ### Campo 9.  Atributos adicionales (attributes)
 
@@ -71,13 +61,13 @@ Contiene metadatos en el formato `clave=valor`, separados por punto y coma. Este
 * `Parent`: indica jerarquía (por ejemplo, un `exon` puede tener como `Parent` un `mRNA`)
 * `Alias`, `Note`, `Dbxref`, entre otros.
 
-**Ejemplo completo:**
+**Ejemplo:**
 
 ID=gene00001;Name=EDEN
 
 ---
 
-### Ejemplo general de una línea GFF3
+### Ejemplo completo de una línea GFF3
 
 ```txt
 ctg123 genbank gene 1000 9000 . + . ID=gene00001;Name=EDEN
