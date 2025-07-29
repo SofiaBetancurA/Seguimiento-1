@@ -3,7 +3,7 @@ mkdir -p sofia/seguimiento_1
 cd sofia/seguimiento_1
 
 # Descargar el archivo GFF3 del organismo Chrysemys picta bellii 
-#Se utilizó el comando **wget** que sirve para descargar archivos a partir de una URL
+#El comando wget sirve para descargar archivos a partir de una URL
 wget http://ftp.ensembl.org/pub/current_gff3/chrysemys_picta_bellii/Chrysemys_picta_bellii.Chrysemys_picta_bellii-3.0.3.114.gff3.gz
 
 # Descomprimir el archivo
@@ -11,16 +11,17 @@ wget http://ftp.ensembl.org/pub/current_gff3/chrysemys_picta_bellii/Chrysemys_pi
 wget http://ftp.ensembl.org/pub/current_gff3/chrysemys_picta_bellii/Chrysemys_picta_bellii.Chrysemys_picta_bellii-3.0.3.114.gff3.gz
 
 # Contar el número de features
-# El siguiente comando toma el archivo GFF3, muestra su contenido con cat, elimina todas las líneas que empiezan con # usando grep -v "#", selecciona solo la primera línea de las que quedan con head -n 1, y finalmente cuenta cuántas palabras hay en esa línea con wc -w
-cat Chrysemys_picta_bellii.Chrysemys_picta_bellii-3.0.3.114.gff3 | grep -v "#" | head -n 1 | wc -w
+# El siguiente comando toma el archivo GFF3, muestra su contenido con cat, elimina todas las líneas que empiezan con # usando grep -v "#" y finalmente cuenta cuántas filas o anotaciones biológicas hay con wc -l
+cat Chrysemys_picta_bellii.Chrysemys_picta_bellii-3.0.3.114.gff3 | grep -v "#" |  wc -l
 
 #Contar cuantas regiones (cromosomas) contiene el archivo
-#
+#Con cut -f se extrae solo la primera columna, elimina todas las líneas que empiezan con # usando grep -v "#", se filtra nuevamente la información con el comando grep y la flag E, la cual es usada para poder utilizar expresiones regulares extendidas en el patrón de búsqueda (como +): ^ indica el inicio de la línea, [0-9] busca cualquier dígito del 0 al 9 con uno o mas dígitos consecutivos (+) y $ marca el final de la línea
+cat Chrysemys_picta_bellii.Chrysemys_picta_bellii-3.0.3.114.gff3 | cut -f1 | grep -v "#" | grep -E "^[0-9]+$" | sort | uniq | wc -l
 
 #Cuantos genes estan listados en el organismo
-#
+#Extrae la tercera columna (type) con cut -f y cuenta cuántas veces aparece el tipo de feature “gene”, sin distinguir entre mayúsculas y minúsculas con el comando grep -ci
 cat Chrysemys_picta_bellii.Chrysemys_picta_bellii-3.0.3.114.gff3 | grep -v "#" | cut -f 3 | grep -ci "gene"
 
 #Top 10 de tipo de features más anotados en el genoma
-#
+#Extrae la tercera columna con los tipos de features con cut-f, cuenta cuántas veces aparece cada una de las categorías únicas y los ordena en un ranking de mayor a menor frecuencia, mostrando solo los 10 más anotados en el genoma.
 cat Chrysemys_picta_bellii.Chrysemys_picta_bellii-3.0.3.114.gff3 | grep -v "#" | cut -f 3 | sort-uniq-count-rank  | head -n 10
