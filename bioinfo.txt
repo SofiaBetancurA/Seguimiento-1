@@ -8,7 +8,7 @@ wget http://ftp.ensembl.org/pub/current_gff3/chrysemys_picta_bellii/Chrysemys_pi
 
 # Descomprimir el archivo
 #Se utilizó el comando gzip -d, gzip es una herramienta para archivos comprimidos y la flag d se usa para descomprimir
-wget http://ftp.ensembl.org/pub/current_gff3/chrysemys_picta_bellii/Chrysemys_picta_bellii.Chrysemys_picta_bellii-3.0.3.114.gff3.gz
+gzip -d http://ftp.ensembl.org/pub/current_gff3/chrysemys_picta_bellii/Chrysemys_picta_bellii.Chrysemys_picta_bellii-3.0.3.114.gff3.gz
 
 # Contar el número de features
 # El siguiente comando toma el archivo GFF3, muestra su contenido con cat, elimina todas las líneas que empiezan con # usando grep -v "#" y finalmente cuenta cuántas filas o anotaciones biológicas hay con wc -l
