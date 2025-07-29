@@ -15,8 +15,8 @@ wget http://ftp.ensembl.org/pub/current_gff3/chrysemys_picta_bellii/Chrysemys_pi
 cat Chrysemys_picta_bellii.Chrysemys_picta_bellii-3.0.3.114.gff3 | grep -v "#" |  wc -l
 
 #Contar cuantas regiones (cromosomas) contiene el archivo
-#Con cut -f se extrae solo la primera columna, elimina todas las líneas que empiezan con # usando grep -v "#", se filtra nuevamente la información con el comando grep y la flag E, la cual es usada para poder utilizar expresiones regulares extendidas en el patrón de búsqueda (como +): ^ indica el inicio de la línea, [0-9] busca cualquier dígito del 0 al 9 con uno o mas dígitos consecutivos (+) y $ marca el final de la línea
-cat Chrysemys_picta_bellii.Chrysemys_picta_bellii-3.0.3.114.gff3 | cut -f1 | grep -v "#" | grep -E "^[0-9]+$" | sort | uniq | wc -l
+#Con cut -f se extrae solo la primera columna, luego con el comando grep se filtra solo la información que haga match con el patrón ##sequence-region y finalmente se cuenta el número de líneas con wc -l
+cat Chrysemys_picta_bellii.Chrysemys_picta_bellii-3.0.3.114.gff3 | cut -f1 | grep "##sequence-region" | wc -l
 
 #Cuantos genes estan listados en el organismo
 #Extrae la tercera columna (type) con cut -f y cuenta cuántas veces aparece el tipo de feature “gene”, sin distinguir entre mayúsculas y minúsculas con el comando grep -ci
